@@ -38,9 +38,9 @@ public class NatureEduWebApplication extends SpringBootServletInitializer {
     }
 
     public static void main(String[] args) throws Exception {
-        logger.info("开始启动！");
+        logger.info("===============开始启动！============");
         SpringApplication.run(NatureEduWebApplication.class, args);
-        logger.info("启动完成！");
+        logger.info("===============启动完成！============");
     }
 
 }

@@ -102,7 +102,7 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    @Cached(name="nature.edu.user",key="#userId",expire = 20, cacheType = CacheType.REMOTE)
+    @Cached(name="nature.edu.user",key="#userId",expire = 120, cacheType = CacheType.REMOTE)
     public Response<UserVO> getUser(String userId) {
         if (StringUtils.isBlank(userId)) {
             logger.error("查询用户信息时，userId不能为空'");

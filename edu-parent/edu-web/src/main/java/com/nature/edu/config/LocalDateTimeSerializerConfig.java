@@ -11,7 +11,7 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 /**
  * @Title: LocalDateTimeSerializerConfig.java
  * @Description: 全局日期格式化处理，日期统一用 LocalDateTime  
- * @remark: 个性配置使用：字段增加注解 //@JsonFormat(locale = "zh", timezone = "GMT+8", pattern = "yyyy-MM-dd")
+ * @remark: 个性配置使用：字段上增加注解 //@JsonFormat(locale = "zh", timezone = "GMT+8", pattern = "yyyy-MM-dd")
  * @author lilun
  * @date 2020-04-16 09:57:17 
  * @version 1.0

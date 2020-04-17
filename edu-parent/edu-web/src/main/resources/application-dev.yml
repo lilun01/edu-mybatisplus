@@ -37,8 +37,9 @@ jetcache:
       database: 1
       password: 123456
       port: 6379
-      valueEncoder: java
-      valueDecoder: java
+      # redis中的序列化格式
+      valueEncoder: fastjson  # 支持JAVA、KRYO  这里写的 fastjson是我自己添加的 一个支持列，修改了DefaultEncoderParser.java源码  
+      valueDecoder: fastjson   # 支持JAVA、KRYO  这里写的 fastjson是我自己添加的 一个支持列，修改了DefaultEncoderParser.java源码  
       expireAfterWriteInMillis: 5000 # 序列化器的全局配置。仅remote类型的缓存需要指定，可选java和kryo
       poolConfig:
         minIdle: 5
