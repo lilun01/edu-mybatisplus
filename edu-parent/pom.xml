@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.1.6.RELEASE</version>
+        <relativePath/>
+    </parent>
+    <groupId>com.nature</groupId>
+    <artifactId>edu-parent</artifactId>
+    <packaging>pom</packaging>
+    <version>0.0.1</version>
+    <description>nature-edu的springboot学习</description>
+    <modules>
+        <module>edu-api</module>
+        <module>edu-web</module>
+    </modules>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        <!-- slf4j日志 -->
+        <slf4j.version>1.7.25</slf4j.version>
+        <log4j2.version>2.7</log4j2.version>
+        <!--支持异步日志-->
+        <disruptor.version>3.2.0</disruptor.version>
+        <!--mysql驱动 -->
+        <mysql.version>5.1.46</mysql.version>
+
+        <!--阿里druid连接池-->
+        <druid.version>1.1.18</druid.version>
+        <!--mybatis-plus -->
+        <mybatis-plus.version>3.1.2</mybatis-plus.version>
+        <mybatis-plus-boot-starter.version>3.1.2</mybatis-plus-boot-starter.version>
+        <mybatis-ehcache.version>1.0.0</mybatis-ehcache.version>
+        <!--dubbo -->
+        <dubbo.version>2.8.4</dubbo.version>
+        <!--zookeeper客户端-->
+        <zkclient.version>0.8</zkclient.version>
+        <!--通用工具类-->
+        <commons-lang3.version>3.7</commons-lang3.version>
+        <commons-io.version>2.6</commons-io.version>
+        <commons-codec.version>1.11</commons-codec.version>
+        <commons-fileupload.version>1.3.1</commons-fileupload.version>
+        <jpinyin.version>1.1.8</jpinyin.version>
+        <thumbnailator.version>0.4.8</thumbnailator.version>
+        <joda.time.version>2.9.9</joda.time.version>
+        <xsequence.version>1.6</xsequence.version>
+        <bitwalker.version>1.21</bitwalker.version>
+        <kaptcha.version>2.3.2</kaptcha.version>
+        <javassist.version>3.22.0-GA</javassist.version>
+        <!--fastjson工具类-->
+        <fastjson.version>1.2.45</fastjson.version>
+        <!--http客户端okttp-->
+        <okhttp.version>3.9.1</okhttp.version>
+        <!--redis-->
+        <jedis.version>2.9.0</jedis.version>
+        <spring-session.version>1.3.3.RELEASE</spring-session.version>
+        <!-- shiro -->
+        <shiro-spring.version>1.4.0</shiro-spring.version>
+        <shiro-freemarker-tags.version>0.1</shiro-freemarker-tags.version>
+        <json-lib.version>2.4</json-lib.version>
+        <jsoup.version>1.10.1</jsoup.version>
+        <!--swagger API生成工具-->
+        <swagger2.version>2.7.0</swagger2.version>
+        <swagger2-ui.version>2.7.0</swagger2-ui.version>
+        <springfox.version>2.7.0</springfox.version>
+        <swagger-annotations.version>1.5.20</swagger-annotations.version>
+        <!-- elasticsearch -->
+        <elasticsearch.version>6.6.0</elasticsearch.version>
+        <!--rocketmq-->
+        <rocketmq.version>3.2.6</rocketmq.version>
+        <!-- ueditor -->
+        <ueditor.version>1.1.1</ueditor.version>
+        <!-- poi -->
+        <poi.version>3.11-20141221</poi.version>
+    </properties>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <!--<version>3.0.1</version>  -->
+                <configuration>
+                    <attach>true</attach>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <skipTests>true</skipTests>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+
+</project>

@@ -1,0 +1,67 @@
+---
+spring:
+  application:
+    name: edu-web
+  datasource:
+    druid:
+      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+      minIdle: 5
+      validationQuery: SELECT 1 FROM DUAL
+      useGlobalDataSourceStat: true
+      initialSize: 5
+      maxWait: 60000
+      filters: stat,wall,slf4j
+      poolPreparedStatements: true
+      url: jdbc:mysql://127.0.0.1:3306/nature-edu?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
+      maxPoolPreparedStatementPerConnectionSize: 20
+      username: root
+      password: 123456
+      testWhileIdle: true
+      testOnBorrow: false
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      testOnReturn: false
+      driver-class-name: com.mysql.jdbc.Driver
+      maxActive: 20
+    type: com.alibaba.druid.pool.DruidDataSource
+logging:
+  config: classpath:log4j2.xml
+jetcache:
+  areaInCacheName: false  # areaName是否作为缓存key前缀，默认True
+  statIntervalMinutes: 1 # 统计间隔，默认0：表示不统计
+  # 已支持可选：redis、tair
+  remote: 
+    default:
+      type: redis
+      host: 127.0.0.1
+      database: 1
+      password: 123456
+      port: 6379
+      valueEncoder: java
+      valueDecoder: java
+      expireAfterWriteInMillis: 5000 # 序列化器的全局配置。仅remote类型的缓存需要指定，可选java和kryo
+      poolConfig:
+        minIdle: 5
+        maxIdle: 20
+        maxTotal: 50
+      keyConvertor: fastjson # key转换器的全局配置，当前只有：fastjson, @see com.alicp.jetcache.support.FastjsonKeyConvertor
+  local:
+    default:
+      limit: 100 # 每个缓存实例的最大元素的全局配置，仅local类型的缓存需要指定
+      type: linkedhashmap # 已支持可选：linkedhashmap、caffeine
+      expireAfterAccessInMillis: 30000 # jetcache2.2以上，以毫秒为单位，指定多长时间没有访问，就让缓存失效，当前只有本地缓存支持。0表示不使用这个功能
+      keyConvertor: fastjson
+mybatis-plus:
+  configuration:
+    cache-enabled: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl   # 配置打印完整的sql
+    map-underscore-to-camel-case: true
+    call-setters-on-nulls: true
+  mapper-locations: classpath:mapper/edu/mysql/*Mapper.xml
+  global-config:
+    db-column-underline: true
+    db-config:
+      logic-delete-field: deleted  #全局逻辑删除字段值
+      logic-delete-value: 1 #逻辑删除值
+      logic-not-delete-value: 0  #逻辑未删除值
+  type-aliases-package: com.nature.edu.entity
