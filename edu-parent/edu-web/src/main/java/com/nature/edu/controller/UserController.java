@@ -16,7 +16,7 @@ import com.nature.edu.vo.UserVO;
 
 /**
  * @Title: UserController.java
- * @Description: TODO(描述)
+ * @Description: 用户类
  * @author lilun
  * @date 2020-04-16 10:01:04 
  * @version 1.0
