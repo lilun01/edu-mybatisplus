@@ -1,7 +1,5 @@
 package com.nature.edu;
 
-import com.alicp.jetcache.anno.config.EnableCreateCacheAnnotation;
-import com.alicp.jetcache.anno.config.EnableMethodCache;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +10,9 @@ import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
+
+import com.alicp.jetcache.anno.config.EnableCreateCacheAnnotation;
+import com.alicp.jetcache.anno.config.EnableMethodCache;
 
 /**
  * @author wangck

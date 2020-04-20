@@ -88,21 +88,10 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.alicp.jetcache</groupId>
-			<artifactId>jetcache-starter-redis</artifactId>
-			<version>2.6.0.M3</version>
-		   <!--  <exclusions>
-				<exclusion>
-					<groupId>com.alicp.jetcache</groupId>
-					<artifactId>jetcache-anno</artifactId>
-				</exclusion>
-			</exclusions>   -->
+		    <groupId>com.alicp.jetcache</groupId>
+		    <artifactId>jetcache-starter-redis</artifactId>
+		    <version>2.6.0.M3</version>
 		</dependency>
-		  <!--  <dependency>
-			<groupId>com.alicp.jetcache</groupId>
-			<artifactId>jetcache-anno</artifactId>
-			<version>2.6.0.1</version>
-		</dependency>   -->
 		<dependency>
 			<groupId>io.searchbox</groupId>
 			<artifactId>jest</artifactId>
@@ -116,10 +105,16 @@
 		</dependency>
 
 		<dependency>
+		    <groupId>org.redisson</groupId>
+		    <artifactId>redisson</artifactId>
+		    <version>3.12.4</version>
+		</dependency>
+		<dependency>
 			<groupId>com.nature</groupId>
 			<artifactId>edu-api</artifactId>
 			<version>0.0.1</version>
 		</dependency>
+		
 	</dependencies>
 	<build>
 		<plugins>
