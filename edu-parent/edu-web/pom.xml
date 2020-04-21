@@ -82,12 +82,6 @@
 
 
 		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<optional>true</optional>
-		</dependency>
-
-		<dependency>
 		    <groupId>com.alicp.jetcache</groupId>
 		    <artifactId>jetcache-starter-redis</artifactId>
 		    <version>2.6.0.M3</version>
@@ -103,18 +97,22 @@
 			<artifactId>xsequence-core</artifactId>
 			<version>${xsequence.version}</version>
 		</dependency>
-
-		<dependency>
-		    <groupId>org.redisson</groupId>
-		    <artifactId>redisson</artifactId>
-		    <version>3.12.4</version>
-		</dependency>
 		<dependency>
 			<groupId>com.nature</groupId>
 			<artifactId>edu-api</artifactId>
 			<version>0.0.1</version>
 		</dependency>
-		
+        <!-- spring-integration 分布式锁  begin -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-integration</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.integration</groupId>
+			<artifactId>spring-integration-redis</artifactId>
+		</dependency>
+        <!-- spring-integration 分布式锁  end -->
+        
 	</dependencies>
 	<build>
 		<plugins>

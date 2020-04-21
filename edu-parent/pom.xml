@@ -79,6 +79,13 @@
         <!-- poi -->
         <poi.version>3.11-20141221</poi.version>
     </properties>
+    <dependencies>
+      	<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+    </dependencies>
     <build>
         <plugins>
             <plugin>

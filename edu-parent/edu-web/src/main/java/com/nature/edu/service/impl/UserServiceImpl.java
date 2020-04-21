@@ -111,8 +111,8 @@ public class UserServiceImpl implements IUserService {
         BasUser basUser = basUserMapper.selectById(userId);
          //BasUser basUser = basUserMapper.selectOne(new QueryWrapper<BasUser>().lambda().eq(true, BasUser::getPersonName, "lisi"));
         
+        UserVO user = new UserVO();
         if (basUser != null) {
-            UserVO user = new UserVO();
             user.setUserId(basUser.getUserId());
             user.setUserNo(basUser.getUserNo());
             user.setUserName(basUser.getUserName());
@@ -123,7 +123,7 @@ public class UserServiceImpl implements IUserService {
             return Response.successResult("查询用户成功", user);
         } else {
             logger.error("查询用户失败，用户Id：{}", userId);
-            return Response.failResult("查询用户失败", null);
+            return Response.failResult("查询用户失败", user);
         }
     }
 

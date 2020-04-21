@@ -2,15 +2,21 @@ package com.nature.edu.vo;
 
 import com.nature.NatureObject;
 
-import java.io.Serializable;
-
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 /**
- * @author wangck
- * @date 2019/7/25
+ * @Title: UserVO.java
+ * @Description: TODO(描述)
+ * @author lilun
+ * @date 2020-04-21 03:01:21 
+ * @version 1.0
  */
+@EqualsAndHashCode(callSuper=false)
+@Data
 public class UserVO extends NatureObject {
 
-    /**
+	private static final long serialVersionUID = 1L;
+	/**
      * 用户Id
      */
     private String userId;
@@ -40,72 +46,4 @@ public class UserVO extends NatureObject {
      */
     private String pinyName;
 
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public String getUserNo() {
-        return userNo;
-    }
-
-    public void setUserNo(String userNo) {
-        this.userNo = userNo;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getUserHead() {
-        return userHead;
-    }
-
-    public void setUserHead(String userHead) {
-        this.userHead = userHead;
-    }
-
-    public String getNickName() {
-        return nickName;
-    }
-
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
-    }
-
-    public String getPersonName() {
-        return personName;
-    }
-
-    public void setPersonName(String personName) {
-        this.personName = personName;
-    }
-
-    public String getPinyName() {
-        return pinyName;
-    }
-
-    public void setPinyName(String pinyName) {
-        this.pinyName = pinyName;
-    }
-
-    @Override
-    public String toString() {
-        return "UserVO{" +
-                "userId='" + userId + '\'' +
-                ", userNo='" + userNo + '\'' +
-                ", userName='" + userName + '\'' +
-                ", userHead='" + userHead + '\'' +
-                ", nickName='" + nickName + '\'' +
-                ", personName='" + personName + '\'' +
-                ", pinyName='" + pinyName + '\'' +
-                '}';
-    }
 }

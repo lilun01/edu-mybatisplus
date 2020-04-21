@@ -68,9 +68,8 @@ public class Response<T> extends NatureObject {
         return msg;
     }
 
-    public Response<T> setMsg(String msg) {
+    public void setMsg(String msg) {
         this.msg = msg;
-        return this;
     }
 
     public T getData() {

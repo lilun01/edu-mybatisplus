@@ -24,7 +24,7 @@ public class LogInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        logger.info("*******************业务请求开始**********************");
+       // logger.info("*******************业务请求开始**********************");
         try {
             long timed = System.currentTimeMillis();
             startTimeThreadLocal.set(timed);

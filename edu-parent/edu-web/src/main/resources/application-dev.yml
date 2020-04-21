@@ -24,6 +24,17 @@ spring:
       driver-class-name: com.mysql.jdbc.Driver
       maxActive: 20
     type: com.alibaba.druid.pool.DruidDataSource
+  redis:
+    database: 1
+    host: 127.0.0.1
+    #password: 
+    pool:
+      max-active: 200 # 连接池最大连接数（使用负值表示没有限制）
+      max-wait: -1 # 连接池最大阻塞等待时间（使用负值表示没有限制）
+      max-idle: 10 # 连接池中的最大空闲连接
+      min-idle: 5  # 连接池中的最小空闲连接
+    # 连接超时时间（毫秒）
+    timeout: 3000
 logging:
   config: classpath:log4j2.xml
 jetcache:
@@ -35,11 +46,11 @@ jetcache:
       type: redis
       host: 127.0.0.1
       database: 1
-      password: 123456
+      #password: 
       port: 6379
       # redis中的序列化格式
-      valueEncoder: fastjson  # 支持JAVA、KRYO  这里写的 fastjson是我自己添加的 一个支持列，修改了DefaultEncoderParser.java源码  
-      valueDecoder: fastjson   # 支持JAVA、KRYO  这里写的 fastjson是我自己添加的 一个支持列，修改了DefaultEncoderParser.java源码  
+      valueEncoder: java  # 支持JAVA、KRYO  这里写的 fastjson是我自己添加的 一个支持列，修改了DefaultEncoderParser.java源码  
+      valueDecoder: java   # 支持JAVA、KRYO  这里写的 fastjson是我自己添加的 一个支持列，修改了DefaultEncoderParser.java源码  
       expireAfterWriteInMillis: 5000 # 序列化器的全局配置。仅remote类型的缓存需要指定，可选java和kryo
       poolConfig:
         minIdle: 5
@@ -52,6 +63,7 @@ jetcache:
       type: linkedhashmap # 已支持可选：linkedhashmap、caffeine
       expireAfterAccessInMillis: 30000 # jetcache2.2以上，以毫秒为单位，指定多长时间没有访问，就让缓存失效，当前只有本地缓存支持。0表示不使用这个功能
       keyConvertor: fastjson
+
 mybatis-plus:
   configuration:
     cache-enabled: true
