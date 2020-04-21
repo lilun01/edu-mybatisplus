@@ -49,6 +49,7 @@ public class MyRunnable implements Runnable{
 				}
 				System.out.println("id="+id+ ",corn="+corn+ ",定时任务锁获取成功,开始执行定时任务。。。。。。");
 				TimeUnit.SECONDS.sleep(1);
+				DynamicTask.scheduledFutureMap.remove(id);
 			}else {
 				System.out.println("id="+id+ ",corn="+corn+ "定时任务锁获取失败");
 				return;

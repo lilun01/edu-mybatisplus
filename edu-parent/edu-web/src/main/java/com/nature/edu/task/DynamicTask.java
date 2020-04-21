@@ -1,5 +1,6 @@
 package com.nature.edu.task;
 
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ScheduledFuture;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,14 +18,20 @@ import com.nature.edu.service.IUserService;
 public class DynamicTask {
 	@Autowired
 	private ThreadPoolTaskScheduler threadPoolTaskScheduler;
-
+	private int taskSchedulerCorePoolSize = 10;
+	
 	private ScheduledFuture<?> future;
+	// 线程存储器
+	@SuppressWarnings("rawtypes")
+	public static ConcurrentHashMap<String, ScheduledFuture> scheduledFutureMap = new ConcurrentHashMap<String, ScheduledFuture>();
 	
 	
-
 	@Bean
 	public ThreadPoolTaskScheduler threadPoolTaskScheduler() {
-		return new ThreadPoolTaskScheduler();
+		threadPoolTaskScheduler = new ThreadPoolTaskScheduler();
+		threadPoolTaskScheduler.setPoolSize(taskSchedulerCorePoolSize);
+	    threadPoolTaskScheduler.initialize();
+		return threadPoolTaskScheduler;
 	}
 
 	/**
@@ -42,6 +49,7 @@ public class DynamicTask {
 	public String startCron(String id,RedisLockRegistry redisLockRegistry,IUserService userService,String cornStr) {
 
 		future = threadPoolTaskScheduler.schedule(new MyRunnable(id,redisLockRegistry,userService,cornStr), new CronTrigger(cornStr));
+		scheduledFutureMap.put(id, future);
 		return "startCron";
 	}
 

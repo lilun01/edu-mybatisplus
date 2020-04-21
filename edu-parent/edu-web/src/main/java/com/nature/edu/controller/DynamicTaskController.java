@@ -1,6 +1,7 @@
 package com.nature.edu.controller;
 
 import java.util.Date;
+import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 import javax.annotation.Resource;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.alibaba.fastjson.JSON;
 import com.nature.edu.service.IUserService;
 import com.nature.edu.task.DynamicTask;
 import com.nature.edu.util.date.DateCoreUtil;
@@ -45,7 +47,7 @@ public class DynamicTaskController {
 		//return null;
 		String cornStr = DateCoreUtil.getCron(date);
 		System.out.println("cornStr="+cornStr);
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 5; i++) {
 			new Thread(new Runnable() {
 				@Override
 				public void run() {
@@ -61,4 +63,19 @@ public class DynamicTaskController {
 		return "测试完成";
 		
 	}
+	
+	@GetMapping("/task/getMap")
+	public String getMap() {
+		String jsonString = JSON.toJSONString(DynamicTask.scheduledFutureMap);
+		return jsonString;
+	}
+	@GetMapping("/task/stop")
+	public String stop(@RequestParam String userId) {
+		ScheduledFuture scheduledFuture = DynamicTask.scheduledFutureMap.get(userId);
+		if(!scheduledFuture.isCancelled()) {
+			scheduledFuture.cancel(true);
+		}
+		return JSON.toJSONString(scheduledFuture);
+	}
+	
 }
