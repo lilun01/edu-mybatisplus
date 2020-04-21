@@ -1,7 +1,13 @@
 # edu-parent
 
 #### 介绍
-整合企业开发过程中常用技术，分阶段整合druid、mybatis、mybatis-plus、dubbo、zookeeper、redis、springsession、缓存框架jetcache、elaticsearch6以上版本、shiro、消息队列 kafka rocketmq等技术
+整合企业开发过程中常用技术，分阶段整合druid、mybatis-plus、dubbo、zookeeper、redis、springsession、缓存框架jetcache、elaticsearch6以上版本、shiro、消息队列 kafka rocketmq等技术
+1、mybatis-plus
+2、redis分布式锁
+3、jetCache 缓存框架
+4、RabbitMq 
+ 
+
 
 #### 软件架构
 基于springboot2.1.6
