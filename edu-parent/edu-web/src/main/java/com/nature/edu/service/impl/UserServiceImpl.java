@@ -73,6 +73,7 @@ public class UserServiceImpl implements IUserService {
         basUser.setUserId(userId);
         basUser.setUserNo(user.getUserNo());
         basUser.setUserName(user.getUserName());
+        basUser.setNickName(user.getNickName());
         basUser.setPersonName(user.getPersonName());
         Integer count = basUserMapper.updateById(basUser);
         if (count > 0) {
@@ -118,6 +119,7 @@ public class UserServiceImpl implements IUserService {
             user.setUserName(basUser.getUserName());
             user.setUserHead(basUser.getUserHead());
             user.setPersonName(basUser.getPersonName());
+            user.setNickName(basUser.getNickName());
             user.setPinyName(basUser.getPinyName());
             logger.info("查询用户成功，用户Id：{}", userId);
             return Response.successResult("查询用户成功", user);
@@ -133,4 +135,24 @@ public class UserServiceImpl implements IUserService {
         page.setRecords(list);
         return Response.successResult("查询成功", page);
     }
+
+	@Override
+	public Response<UserVO> getUserNOCache(String userId) {
+		BasUser basUser = basUserMapper.selectById(userId);
+		UserVO user = new UserVO();
+		if (basUser != null) {
+			user.setUserId(basUser.getUserId());
+			user.setUserNo(basUser.getUserNo());
+			user.setUserName(basUser.getUserName());
+			user.setUserHead(basUser.getUserHead());
+			user.setPersonName(basUser.getPersonName());
+			user.setNickName(basUser.getNickName());
+			user.setPinyName(basUser.getPinyName());
+			logger.info("查询用户成功，用户Id：{}", userId);
+			return Response.successResult("查询用户成功", user);
+		} else {
+			logger.error("查询用户失败，用户Id：{}", userId);
+			return Response.failResult("查询用户失败", user);
+		}
+	}
 }

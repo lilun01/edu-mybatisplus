@@ -160,6 +160,7 @@ public class UserController {
 		return user;
 	}
 
+	
 	/**
 	 * 
 	 * @Title: infoLockTest
@@ -171,8 +172,8 @@ public class UserController {
 	 * @date 2020-04-21 02:56:50
 	 */
 	@GetMapping("/user/infoLockTest")
-	public String infoLockTest(@RequestParam String userId, @RequestParam String lockKey) {
-
+	public String infoLockTest(@RequestParam String userId, @RequestParam String lockKey,@RequestParam String cornStr) {
+		
 		for (int i = 0; i < 10; i++) {
 			new Thread(new Runnable() {
 				@Override
@@ -182,11 +183,13 @@ public class UserController {
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
+		             //dynamicTask.startCron(userId,redisLockRegistry, userService,cornStr);
 					infoLock(userId,lockKey);
 				}
 			}).start();
 		}
 		return "测试完成";
+		
 	}
 
 	/**

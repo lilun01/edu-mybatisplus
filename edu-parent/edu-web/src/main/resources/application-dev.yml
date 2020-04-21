@@ -67,7 +67,7 @@ jetcache:
 mybatis-plus:
   configuration:
     cache-enabled: true
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl   # 配置打印完整的sql
+   # log-impl: org.apache.ibatis.logging.stdout.StdOutImpl   # 配置打印完整的sql
     map-underscore-to-camel-case: true
     call-setters-on-nulls: true
   mapper-locations: classpath:mapper/edu/mysql/*Mapper.xml

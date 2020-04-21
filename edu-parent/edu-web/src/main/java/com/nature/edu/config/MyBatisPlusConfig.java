@@ -3,12 +3,11 @@ package com.nature.edu.config;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+
 import com.baomidou.mybatisplus.core.injector.ISqlInjector;
 import com.baomidou.mybatisplus.extension.injector.LogicSqlInjector;
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
-import com.baomidou.mybatisplus.extension.plugins.PerformanceInterceptor;
 
 /**
  * 
@@ -46,6 +45,8 @@ public class MyBatisPlusConfig {
      * @author lilun
      * @date 2020-04-17 02:35:00
      */
+	
+	/*
     @Bean
     @Profile({"dev","test"})// 设置 dev test 环境开启，保证我们的效率
     public PerformanceInterceptor performanceInterceptor() {
@@ -54,5 +55,6 @@ public class MyBatisPlusConfig {
         performanceInterceptor.setFormat(true);
         return performanceInterceptor;
     }
+    */
 
 }

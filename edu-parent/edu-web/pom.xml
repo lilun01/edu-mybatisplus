@@ -113,6 +113,13 @@
 		</dependency>
         <!-- spring-integration 分布式锁  end -->
         
+        <!-- ShedLock -轻量级分布式定时任务 begin  https://blog.csdn.net/qq_25933249/article/details/90904621-->
+        <dependency>
+		    <groupId> net.javacrumbs.shedlock </groupId>
+		    <artifactId> shedlock-spring </artifactId>
+		    <version> 2.5.0 </version>
+		</dependency>
+        <!-- ShedLock -轻量级分布式定时任务 end -->
 	</dependencies>
 	<build>
 		<plugins>
