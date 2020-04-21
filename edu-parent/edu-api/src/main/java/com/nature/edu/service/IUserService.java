@@ -53,4 +53,6 @@ public interface IUserService {
      */
     public Response<Page<UserVO>> getUserPage(String searchName,Page<UserVO> page);
 
+	public Response<UserVO> getUserNOCache(String id);
+
 }
