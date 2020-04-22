@@ -52,8 +52,6 @@ public class DynamicTask {
 		//cronTrigger.nextExecutionTime(triggerContext);
 		future = threadPoolTaskScheduler.schedule(new TaskRunnable(id,redisLockRegistry,userService,cornStr),cronTrigger);
 		
-		
-		
 		scheduledFutureMap.putIfAbsent(id, future);
 		return "startCron";
 	}

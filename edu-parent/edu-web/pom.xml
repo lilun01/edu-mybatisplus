@@ -120,6 +120,12 @@
 		    <version> 2.5.0 </version>
 		</dependency>
         <!-- ShedLock -轻量级分布式定时任务 end -->
+        <dependency>
+		    <groupId>org.redisson</groupId>
+		    <artifactId>redisson</artifactId>
+		    <version>3.12.4</version>
+		</dependency>
+        
 	</dependencies>
 	<build>
 		<plugins>

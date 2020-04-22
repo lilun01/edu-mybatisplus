@@ -8,6 +8,8 @@ import java.util.concurrent.locks.Lock;
 import javax.annotation.Resource;
 
 import org.apache.commons.lang.StringUtils;
+import org.redisson.api.RLock;
+import org.redisson.api.RedissonClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.google.common.base.Throwables;
 import com.nature.Response;
 import com.nature.edu.service.IUserService;
+import com.nature.edu.util.lock.RedissonRLock;
 import com.nature.edu.vo.UserVO;
 
 /**
@@ -40,7 +43,13 @@ public class UserController {
 	private RedisLockRegistry redisLockRegistry;
 	@Autowired
 	private IUserService userService;
+	
+	@Resource
+	private RedissonClient redissonClient;
 
+	
+	
+	
 	/**
 	 * 添加用户
 	 * 
@@ -159,6 +168,18 @@ public class UserController {
 		}
 		return user;
 	}
+	@GetMapping("/user/infoLock2")
+	public Response<UserVO> infoLock2(@RequestParam String userId, @RequestParam String lockKey) {
+		if (StringUtils.isBlank(userId)) {
+			logger.error("查询用户信息时，userId不能为空'");
+			return Response.failResult("用户Id不能为空");
+		}
+		Response<UserVO> user = null;
+		RLock rLock = redissonClient.getLock(userId);
+		RedissonRLock.rlock(rLock).atomic(() -> userService.deductUserMoney(userId),5000,7000);
+		//userService.deductUserMoney(userId);
+		return user;
+	}
 
 	
 	/**
@@ -184,7 +205,7 @@ public class UserController {
 						e.printStackTrace();
 					}
 		             //dynamicTask.startCron(userId,redisLockRegistry, userService,cornStr);
-					infoLock(userId,lockKey);
+					infoLock2(userId,lockKey);
 				}
 			}).start();
 		}

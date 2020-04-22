@@ -3,6 +3,8 @@ package com.nature.edu.task;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 
+import org.redisson.api.RLock;
+import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.integration.redis.util.RedisLockRegistry;
 
@@ -23,6 +25,8 @@ public class TaskRunnable implements Runnable{
 	private RedisLockRegistry redisLockRegistry;
 	public String corn;
 	
+	private  RedissonClient redissonClient;
+	
 	//锁名称，一般使用唯一值
 	public String lockKey;
 	
@@ -37,18 +41,22 @@ public class TaskRunnable implements Runnable{
 		
 	}
 	
+
+	
 	/**
 	 * @Description: 分布式锁实现 保证分布式环境下不重复执行
 	 * @return
 	 * @author lilun
 	 * @date 2020-04-21 06:12:48
 	 */
+	
 	@Override
 	public void run() {
 		Lock lock = redisLockRegistry.obtain(lockKey);
+		boolean isLock = false;
 		try {
-			boolean lockResult = lock.tryLock(5, TimeUnit.SECONDS);
-			if(lockResult) {
+			 isLock = lock.tryLock(5, TimeUnit.SECONDS);
+			if(isLock) {
 				Response<UserVO> user = userService.getUserNOCache(lockKey);
 				if("1".equals(user.getData().getNickName())) {//模拟已经执行
 					System.out.println("id="+lockKey+ ",corn="+corn+ ",已经执行了定时任务，不再执行，直接返回");
@@ -70,11 +78,10 @@ public class TaskRunnable implements Runnable{
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}finally {
-			try {
+			if(isLock) {
 				lock.unlock();
 				System.out.println("id="+lockKey+ ",corn="+corn+",释放锁成功");
-			}catch (Exception e) {
-				e.printStackTrace();
+			}else {
 				System.out.println("id="+lockKey+ ",corn="+corn+",没有获取到锁，不用释放");
 			}
 		}
@@ -82,4 +89,10 @@ public class TaskRunnable implements Runnable{
 		String threadName = Thread.currentThread().getName();
 		System.out.println(threadName+ "===DynamicTask.MyRunnable.run(),id=" + lockKey);
 	}
+	
+	
+	
+	
+	
+	
 }

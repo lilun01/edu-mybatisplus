@@ -57,6 +57,9 @@ public class BasUser implements Serializable {
      * 姓名全拼音
      */
     private String pinyName;
+    
+    //钱数
+    private Integer money;
 
 
     @TableField(fill = FieldFill.INSERT)

@@ -43,7 +43,12 @@ public interface IUserService {
      * @return
      */
     public Response<UserVO> getUser(String userId);
+    
+    
+    public Response<UserVO> deductUserMoney(String userId);
 
+    
+    
 
     /**
      * 分页查询用户

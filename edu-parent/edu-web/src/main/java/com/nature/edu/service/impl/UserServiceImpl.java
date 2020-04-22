@@ -1,6 +1,7 @@
 package com.nature.edu.service.impl;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -154,5 +155,18 @@ public class UserServiceImpl implements IUserService {
 			logger.error("查询用户失败，用户Id：{}", userId);
 			return Response.failResult("查询用户失败", user);
 		}
+	}
+
+	@Override
+	public Response<UserVO> deductUserMoney(String userId) {
+		BasUser basUser = basUserMapper.selectById(userId);
+		if(basUser.getMoney() >0) {
+			System.out.println("当前用户的剩余钱数="+basUser.getMoney());
+			basUser.setMoney(basUser.getMoney()-1);
+			basUserMapper.updateById(basUser);
+		}else {
+			System.out.println("钱么有了，不能再扣减了 money="+basUser.getMoney());
+		}
+		return Response.successResult("扣减金额成功", null);
 	}
 }

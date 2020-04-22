@@ -20,6 +20,14 @@ import com.nature.edu.service.IUserService;
 import com.nature.edu.task.DynamicTask;
 import com.nature.edu.util.date.DateCoreUtil;
 
+/**
+ * @Title: DynamicTaskController.java
+ * @Description: 定时任务
+ * @author lilun
+ * @date 2020-04-22 11:31:33 
+ * @version 1.0
+ */
+
 @RestController
 public class DynamicTaskController {
 	//private static final Logger logger = LoggerFactory.getLogger(UserController.class);
@@ -69,6 +77,9 @@ public class DynamicTaskController {
 		return "测试完成";
 		
 	}
+	
+	 
+	
 	
 	/**
 	 * @Description: 得到有哪些任务需要执行
