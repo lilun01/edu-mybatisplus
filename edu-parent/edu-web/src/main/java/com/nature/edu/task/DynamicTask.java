@@ -30,6 +30,7 @@ public class DynamicTask {
 	public ThreadPoolTaskScheduler threadPoolTaskScheduler() {
 		threadPoolTaskScheduler = new ThreadPoolTaskScheduler();
 		threadPoolTaskScheduler.setPoolSize(taskSchedulerCorePoolSize);
+		threadPoolTaskScheduler.setRemoveOnCancelPolicy(true);
 	    threadPoolTaskScheduler.initialize();
 		return threadPoolTaskScheduler;
 	}
@@ -47,9 +48,13 @@ public class DynamicTask {
 	 */
 	@RequestMapping("/startCron")
 	public String startCron(String id,RedisLockRegistry redisLockRegistry,IUserService userService,String cornStr) {
-
-		future = threadPoolTaskScheduler.schedule(new MyRunnable(id,redisLockRegistry,userService,cornStr), new CronTrigger(cornStr));
-		scheduledFutureMap.put(id, future);
+		CronTrigger cronTrigger = new CronTrigger(cornStr);
+		//cronTrigger.nextExecutionTime(triggerContext);
+		future = threadPoolTaskScheduler.schedule(new TaskRunnable(id,redisLockRegistry,userService,cornStr),cronTrigger);
+		
+		
+		
+		scheduledFutureMap.putIfAbsent(id, future);
 		return "startCron";
 	}
 

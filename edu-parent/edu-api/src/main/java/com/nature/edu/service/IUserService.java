@@ -53,6 +53,13 @@ public interface IUserService {
      */
     public Response<Page<UserVO>> getUserPage(String searchName,Page<UserVO> page);
 
+    /**
+     * @Description: 不使用缓存的方式查询用户
+     * @param id
+     * @return
+     * @author lilun
+     * @date 2020-04-22 11:26:59
+     */
 	public Response<UserVO> getUserNOCache(String id);
 
 }
