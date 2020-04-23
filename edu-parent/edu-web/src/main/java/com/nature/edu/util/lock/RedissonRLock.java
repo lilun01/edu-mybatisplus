@@ -1,11 +1,13 @@
 package com.nature.edu.util.lock;
 
-import lombok.extern.slf4j.Slf4j;
+import java.util.concurrent.TimeUnit;
+
 import org.redisson.api.RLock;
 
+import com.nature.edu.task.interfaceTask.CallableTask;
 import com.nature.edu.task.interfaceTask.RunnableTask;
 
-import java.util.concurrent.TimeUnit;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Redisson可重入锁工具
@@ -79,6 +81,41 @@ public class RedissonRLock {
 				rLock.unlock();
 			}
 		}
+	}
+	
+	/**
+	 * 执行原子操作，获取返回值。
+	 * 指定获取锁的等待时间，并尝试自动释放锁。
+	 * @param operation 操作方法
+	 * @param waitTime 获取锁等待时间
+	 * @param leaseTime 获取锁后释放锁时间
+	 * @throws RuntimeException {@code lock}为空，抛出；方法执行错误，抛出；
+	 * @return 操作的返回值，如果未获取到锁，也会返回null
+	 */
+	public <T> T atomic(CallableTask<T> operation, long waitTime, long leaseTime) {
+		boolean isLock = false;
+		T t = null;
+		try {
+			// 加锁
+			isLock = rLock.tryLock(waitTime, leaseTime, TimeUnit.MILLISECONDS);
+			// 是否获取到锁
+			if (isLock) {
+				t = operation.call();
+			}
+		} catch (InterruptedException e) {
+			log.error(e.getMessage(), e);
+			throw new RuntimeException(e.getMessage(), e);
+		} catch (Exception e) {
+			log.error("Redisson加锁方法执行异常：", e);
+			throw new RuntimeException(e.getMessage(), e);
+		} finally {
+			// 获取到锁，才解锁
+			if (isLock) {
+				rLock.unlock();
+			}
+		}
+
+		return t;
 	}
 
 
