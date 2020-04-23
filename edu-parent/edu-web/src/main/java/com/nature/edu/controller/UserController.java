@@ -196,6 +196,8 @@ public class UserController {
 	public String infoLockTest(@RequestParam String userId, @RequestParam String lockKey,@RequestParam String cornStr) {
 		
 		for (int i = 0; i < 10; i++) {
+			//new Thread(()->infoLock2(userId,lockKey)).start();
+			
 			new Thread(new Runnable() {
 				@Override
 				public void run() {

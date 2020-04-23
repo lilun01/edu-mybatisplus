@@ -41,37 +41,6 @@ public class UserLockController {
 	@Resource
 	private RedissonClient redissonClient;
 
-	
-	/**
-	 * 删除用户
-	 * 
-	 * @param userId
-	 * @return
-	 */
-	@GetMapping("/user/delete")
-	public Response<Boolean> deleteUser(@RequestParam String userId) {
-		if (StringUtils.isBlank(userId)) {
-			logger.error("删除用户时，userId不能为空'");
-			return Response.failResult("用户Id不能为空");
-		}
-		return userService.deleteUser(userId);
-	}
-
-	/**
-	 * 查询用户信息
-	 * 
-	 * @param userId
-	 * @return
-	 */
-	@GetMapping("/user/info")
-	public Response<UserVO> getUser(@RequestParam String userId) {
-		if (StringUtils.isBlank(userId)) {
-			logger.error("查询用户信息时，userId不能为空'");
-			return Response.failResult("用户Id不能为空");
-		}
-		return userService.getUser(userId);
-	}
-
 	 
 	/**
 	 * @Title: infoLockTest
