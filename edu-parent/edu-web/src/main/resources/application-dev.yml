@@ -81,3 +81,29 @@ mybatis-plus:
       logic-delete-value: 1 #逻辑删除值
       logic-not-delete-value: 0  #逻辑未删除值
   type-aliases-package: com.nature.edu.entity
+
+eureka:
+  instance:
+    hostname: 127.0.0.1
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:8761/eureka/  
+      
+##hystrix的超时时间
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 4000  # 4s
+      
+# 开启熔断机制 ，否则fallBack不起效      
+feign:
+  hystrix:
+    enabled: true
+  
+  

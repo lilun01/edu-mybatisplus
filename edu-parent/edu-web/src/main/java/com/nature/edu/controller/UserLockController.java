@@ -44,7 +44,7 @@ public class UserLockController {
 	 
 	/**
 	 * @Title: infoLockTest
-	 * @Description: 分布式锁
+	 * @Description: 分布式锁 简化实现
 	 * @param userId
 	 * @param lockKey
 	 * @return

@@ -18,7 +18,6 @@ import com.nature.edu.dao.BasUserMapper;
 import com.nature.edu.entity.BasUser;
 import com.nature.edu.service.IUserService;
 import com.nature.edu.vo.UserVO;
-import com.xuanner.seq.utils.UUIDUtils;
 
 /**
  * @author wangck
@@ -43,7 +42,7 @@ public class UserServiceImpl implements IUserService {
             return Response.failResult("用户姓名不能为空");
         }
         BasUser basUser = new BasUser();
-        basUser.setUserId(UUIDUtils.uuid());
+        
         basUser.setUserNo(user.getUserNo());
         basUser.setUserName(user.getUserName());
         basUser.setPersonName(user.getPersonName());
