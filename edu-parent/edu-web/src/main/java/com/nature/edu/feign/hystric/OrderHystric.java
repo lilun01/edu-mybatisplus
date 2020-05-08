@@ -16,5 +16,11 @@ public class OrderHystric implements OrderFeignClient {
 		return false;
 	}
 
+	@Override
+	public boolean create2() {
+		logger.warn("create2订单服务调用异常，这里是订单的熔断处理方法");
+		return false;
+	}
+
 
 }
