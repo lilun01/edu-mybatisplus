@@ -1,15 +1,13 @@
 package com.nature.edu.controller;
 
-import java.util.Optional;
-
+import cn.hutool.json.JSONUtil;
+import com.nature.edu.entity.BasUser;
+import com.nature.edu.entity.UserAddress;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nature.edu.entity.BasUser;
-import com.nature.edu.entity.UserAddress;
-
-import cn.hutool.json.JSONUtil;
-import lombok.extern.slf4j.Slf4j;
+import java.util.Optional;
 
 /**
  * @Title: OptionalTestController.java
@@ -41,11 +39,11 @@ public class OptionalTestController {
 		
 		log.info("user={}",JSONUtil.toJsonStr(user));
 		//其中一个为空，表示不存在，没有返回默认值
-		//String name = Optional.ofNullable(user).map(BasUser::getUserAddress).map(UserAddress::getAddress).orElse("没有符合条件的字符串");
+		String name = Optional.ofNullable(user).map(BasUser::getUserAddress).map(UserAddress::getAddress).orElse("没有符合条件的字符串");
 		//没有，抛出异常
-		String name2 = Optional.ofNullable(user).map(BasUser::getUserAddress).map(UserAddress::getAddress).orElseThrow(()->{throw new IllegalStateException("没有存在的值");});
+		//String name2 = Optional.ofNullable(user).map(BasUser::getUserAddress).map(UserAddress::getAddress).orElseThrow(()->{throw new IllegalStateException("没有存在的值");});
 
-		return name2;
+		return name;
 	}
 
 

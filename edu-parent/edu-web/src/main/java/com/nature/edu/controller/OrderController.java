@@ -1,23 +1,17 @@
 package com.nature.edu.controller;
 
-import java.util.NoSuchElementException;
-import java.util.Optional;
-
-import javax.annotation.Resource;
-
+import cn.hutool.json.JSONUtil;
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
+import com.nature.edu.entity.BasUser;
+import com.nature.edu.entity.UserAddress;
+import com.nature.edu.feign.OrderFeignClient;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.alibaba.csp.sentinel.annotation.SentinelResource;
-import com.alibaba.druid.support.json.JSONUtils;
-import com.esotericsoftware.minlog.Log;
-import com.nature.edu.entity.BasUser;
-import com.nature.edu.entity.UserAddress;
-import com.nature.edu.feign.OrderFeignClient;
-
-import cn.hutool.json.JSONUtil;
-import lombok.extern.slf4j.Slf4j;
+import javax.annotation.Resource;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/order")
@@ -59,10 +53,10 @@ public class OrderController {
 		user.setUserAddress(address);
 		//address.setAddress("四川");
 		log.info("user={}",JSONUtil.toJsonStr(user));
-		//String name = Optional.ofNullable(user).map(BasUser::getUserAddress).map(UserAddress::getAddress).orElse("没有符合条件的字符串");
-		String name2 = Optional.ofNullable(user).map(BasUser::getUserAddress).map(UserAddress::getAddress).orElseThrow(()->{throw new IllegalStateException("没有存在的值");});
+		String name = Optional.ofNullable(user).map(BasUser::getUserAddress).map(UserAddress::getAddress).orElse("没有符合条件的字符串");
+		//String name2 = Optional.ofNullable(user).map(BasUser::getUserAddress).map(UserAddress::getAddress).orElseThrow(()->{throw new IllegalStateException("没有存在的值");});
 
-		return name2;
+		return name;
 	}
 
 
