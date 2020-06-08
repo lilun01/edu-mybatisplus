@@ -82,9 +82,9 @@
 
 
 		<dependency>
-		    <groupId>com.alicp.jetcache</groupId>
-		    <artifactId>jetcache-starter-redis</artifactId>
-		    <version>2.6.0.M3</version>
+			<groupId>com.alicp.jetcache</groupId>
+			<artifactId>jetcache-starter-redis</artifactId>
+			<version>2.6.0.M3</version>
 		</dependency>
 		<dependency>
 			<groupId>io.searchbox</groupId>
@@ -102,7 +102,7 @@
 			<artifactId>edu-api</artifactId>
 			<version>0.0.1</version>
 		</dependency>
-        <!-- spring-integration 分布式锁  begin -->
+		<!-- spring-integration 分布式锁 begin -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-integration</artifactId>
@@ -111,38 +111,46 @@
 			<groupId>org.springframework.integration</groupId>
 			<artifactId>spring-integration-redis</artifactId>
 		</dependency>
-        <!-- spring-integration 分布式锁  end -->
-        
-        <!-- ShedLock -轻量级分布式定时任务 begin  https://blog.csdn.net/qq_25933249/article/details/90904621-->
-        <dependency>
-		    <groupId> net.javacrumbs.shedlock </groupId>
-		    <artifactId> shedlock-spring </artifactId>
-		    <version> 2.5.0 </version>
+		<!-- spring-integration 分布式锁 end -->
+
+		<!-- ShedLock -轻量级分布式定时任务 begin https://blog.csdn.net/qq_25933249/article/details/90904621 -->
+		<dependency>
+			<groupId> net.javacrumbs.shedlock </groupId>
+			<artifactId> shedlock-spring </artifactId>
+			<version> 2.5.0 </version>
 		</dependency>
-        <!-- ShedLock -轻量级分布式定时任务 end -->
-        <dependency>
-		    <groupId>org.redisson</groupId>
-		    <artifactId>redisson</artifactId>
-		    <version>3.12.4</version>
+		<!-- ShedLock -轻量级分布式定时任务 end -->
+		<dependency>
+			<groupId>org.redisson</groupId>
+			<artifactId>redisson</artifactId>
+			<version>3.12.4</version>
 		</dependency>
-		 <!-- eureka 注意版本问题，太高了，会提示找不到类  2.1.1版本 feignClient 的 url 参数不指定有问题  -->
+		<!-- eureka 注意版本问题，太高了，会提示找不到类 2.1.1版本 feignClient 的 url 参数不指定有问题 -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-openfeign</artifactId>
-			 <version>2.1.2.RELEASE</version>
+			<version>2.1.2.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-			 <version>2.1.2.RELEASE</version>
+			<version>2.1.2.RELEASE</version>
 		</dependency>
-         
+		<!-- alibaba sentinel 流量限流 2.1.1 这个版本没有问题 -->
+		<dependency>
+			<groupId>com.alibaba.cloud</groupId>
+			<artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
+			<version>2.1.1.RELEASE</version>
+		</dependency>
+
 	</dependencies>
 	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<!-- 不打入配置文件 -->
+				
 			</plugin>
 		</plugins>
 	</build>

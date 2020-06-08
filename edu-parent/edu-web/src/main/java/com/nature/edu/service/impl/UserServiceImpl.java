@@ -168,4 +168,5 @@ public class UserServiceImpl implements IUserService {
 		}
 		return Response.successResult("扣减金额成功", null);
 	}
+	
 }

@@ -6,6 +6,8 @@ server:
     context-path: /
     
 spring:
+  application:
+    name: edu-web  
   profiles:
     active: dev
 

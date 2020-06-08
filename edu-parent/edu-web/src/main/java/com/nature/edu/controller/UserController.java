@@ -1,31 +1,26 @@
 package com.nature.edu.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.Lock;
-
-import javax.annotation.Resource;
-
-import org.apache.commons.lang.StringUtils;
-import org.redisson.api.RLock;
-import org.redisson.api.RedissonClient;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.integration.redis.util.RedisLockRegistry;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
+import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.google.common.base.Throwables;
 import com.nature.Response;
 import com.nature.edu.service.IUserService;
 import com.nature.edu.util.lock.RedissonRLock;
 import com.nature.edu.vo.UserVO;
+import org.apache.commons.lang.StringUtils;
+import org.redisson.api.RLock;
+import org.redisson.api.RedissonClient;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.integration.redis.util.RedisLockRegistry;
+import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.Lock;
 
 /**
  * @Title: UserController.java
@@ -41,7 +36,7 @@ public class UserController {
 
 	@Resource
 	private RedisLockRegistry redisLockRegistry;
-	@Autowired
+	@Resource
 	private IUserService userService;
 	
 	@Resource
@@ -122,9 +117,9 @@ public class UserController {
 
 	/**
 	 * 
-	 * @Title: infoLock
+	 * @title: infoLock
 	 * @Description: 分布式锁实现 举例
-	 * @param userId
+	 * @param userId 用户id
 	 * @param lockKey 加锁的关键字，一般使用实体的唯一值 id,code等
 	 * @return
 	 * @author lilun
@@ -143,7 +138,7 @@ public class UserController {
 			boolean getLockResult = lock.tryLock(5, TimeUnit.SECONDS);
 			System.out.println("获取锁结果：" + getLockResult);
 			if (getLockResult) {
-				 logger.info("{}-{}获取锁={}", Thread.currentThread(),new  SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+				 logger.info("{}-{}获取锁", Thread.currentThread(),new  SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
 				user = userService.getUser(userId);
 				TimeUnit.SECONDS.sleep(1);
 				System.out.println("获取锁成功！！！");
@@ -234,4 +229,18 @@ public class UserController {
 		}
 		return userService.getUserPage(searchName, page);
 	}
+	
+	@SentinelResource(value = "testSentinel", blockHandler  = "execptionHandler")
+	public String testSentinel(String msg) {
+		
+		return "200";
+	}
+	
+	public String execptionHandler(BlockException ex) {
+		System.out.println("流量过大，被限流了");
+		//ex.printStackTrace();
+		return "流量过大，被限流了";
+
+	}
+	
 }

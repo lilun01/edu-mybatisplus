@@ -21,6 +21,7 @@ import org.springframework.context.annotation.Configuration;
 public class RedissionConfig {
 	private static final Logger logger = LoggerFactory.getLogger(RedissionConfig.class);
 	
+	
 	 @Bean
 	 public RedissonClient getRedisson(){
 	      Config config=new Config();
@@ -29,5 +30,6 @@ public class RedissionConfig {
 	      logger.info("成功连接Redis Server" );
 	      return redisson;
 	   }
+	  
 
 }
