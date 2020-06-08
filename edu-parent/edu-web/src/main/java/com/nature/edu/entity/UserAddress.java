@@ -3,8 +3,6 @@ package com.nature.edu.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-import org.apache.tomcat.jni.Address;
-
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -21,49 +19,22 @@ import lombok.NoArgsConstructor;
  * @author wangck
  * @since 2019-08-07
  */
-@TableName("bas_user")
+@TableName("user_address")
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class BasUser implements Serializable {
+public class UserAddress implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	
 	/**
      * 用户Id，主键
      */
-    @TableId("user_id")
-    private String userId;
-    /**
-     * 账号
-     */
-    private String userNo;
+    @TableId("address_id")
+    private String addressId;
     
-    private UserAddress userAddress;
-    /**
-     * 登录名
-     */
-    private String userName;
-    /**
-     * 头像
-     */
-    private String userHead;
-    /**
-     * 昵称
-     */
-    private String nickName;
-    /**
-     * 姓名
-     */
-    private String personName;
-    /**
-     * 姓名全拼音
-     */
-    private String pinyName;
-    
-    //钱数
-    private Integer money;
+    private String address;
 
 
     @TableField(fill = FieldFill.INSERT)
