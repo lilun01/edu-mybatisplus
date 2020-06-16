@@ -45,6 +45,16 @@ public class OptionalTestController {
 
 		return name;
 	}
+	
+	@RequestMapping("/loopTest")
+	public boolean  loopTest() throws InterruptedException {
+		log.info("等待2s进入死循环");
+		Thread.sleep(2000);
+		long  i =1;
+		while(true) {
+			i = i+1;
+		}
+	}
 
 
 }

@@ -40,6 +40,7 @@ public class BasUser implements Serializable {
      */
     private String userNo;
     
+    @TableField(exist = false)
     private UserAddress userAddress;
     /**
      * 登录名

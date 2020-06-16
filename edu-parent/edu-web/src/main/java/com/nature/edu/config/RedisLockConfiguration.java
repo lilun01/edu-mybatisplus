@@ -8,7 +8,7 @@ import org.springframework.integration.redis.util.RedisLockRegistry;
 /**
  * 
  * @Title: RedisLockConfiguration.java
- * @Description: 分布式锁的配置类
+ * @Description: 分布式锁的配置类（定时任务测试使用）
  * @author lilun
  * @date 2020-04-21 10:47:09 
  * @version 1.0

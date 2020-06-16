@@ -52,6 +52,7 @@ public class RedissonRLock {
 	/**
 	 * 执行原子操作。
 	 * 指定获取锁的等待时间，并尝试自动释放锁。
+	 * 缺点：超过等待时间后，会放弃执行，直接返回false；
 	 * @param operation 操作方法
 	 * @param waitTime 获取锁等待时间
 	 * @param leaseTime 获取锁后释放锁时间
@@ -86,6 +87,7 @@ public class RedissonRLock {
 	/**
 	 * 执行原子操作，获取返回值。
 	 * 指定获取锁的等待时间，并尝试自动释放锁。
+	 * 缺点：超过等待时间后，会放弃执行，直接返回false；
 	 * @param operation 操作方法
 	 * @param waitTime 获取锁等待时间
 	 * @param leaseTime 获取锁后释放锁时间
@@ -115,6 +117,33 @@ public class RedissonRLock {
 			}
 		}
 
+		return t;
+	}
+	public <T> T lock(CallableTask<T> operation, long waitTime, long leaseTime) {
+		boolean isLock = false;
+		T t = null;
+		try {
+			rLock.lock(leaseTime, TimeUnit.MILLISECONDS);
+			
+			// 加锁
+			isLock = rLock.tryLock(waitTime, leaseTime, TimeUnit.MILLISECONDS);
+			// 是否获取到锁
+			if (isLock) {
+				t = operation.call();
+			}
+		} catch (InterruptedException e) {
+			log.error(e.getMessage(), e);
+			throw new RuntimeException(e.getMessage(), e);
+		} catch (Exception e) {
+			log.error("Redisson加锁方法执行异常：", e);
+			throw new RuntimeException(e.getMessage(), e);
+		} finally {
+			// 获取到锁，才解锁
+			if (isLock) {
+				rLock.unlock();
+			}
+		}
+		
 		return t;
 	}
 

@@ -163,10 +163,11 @@ public class UserServiceImpl implements IUserService {
 			System.out.println("当前用户的剩余钱数="+basUser.getMoney());
 			basUser.setMoney(basUser.getMoney()-1);
 			basUserMapper.updateById(basUser);
+			return Response.successResult("扣减金额成功");
 		}else {
 			System.out.println("钱么有了，不能再扣减了 money="+basUser.getMoney());
+			return Response.failResult("钱么有了，不能再扣减了");
 		}
-		return Response.successResult("扣减金额成功", null);
 	}
 	
 }

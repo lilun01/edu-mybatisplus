@@ -1,26 +1,33 @@
 package com.nature.edu.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.Lock;
+
+import javax.annotation.Resource;
+
+import org.apache.commons.lang.StringUtils;
+import org.redisson.api.RLock;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.integration.redis.util.RedisLockRegistry;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.google.common.base.Throwables;
 import com.nature.Response;
+import com.nature.edu.config.redis.RedissonManager;
 import com.nature.edu.service.IUserService;
 import com.nature.edu.util.lock.RedissonRLock;
 import com.nature.edu.vo.UserVO;
-import org.apache.commons.lang.StringUtils;
-import org.redisson.api.RLock;
-import org.redisson.api.RedissonClient;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.integration.redis.util.RedisLockRegistry;
-import org.springframework.web.bind.annotation.*;
-
-import javax.annotation.Resource;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.Lock;
 
 /**
  * @Title: UserController.java
@@ -39,9 +46,8 @@ public class UserController {
 	@Resource
 	private IUserService userService;
 	
-	@Resource
-	private RedissonClient redissonClient;
-
+	@Autowired
+	private  RedissonManager redissonManager;
 	
 	
 	
@@ -170,7 +176,7 @@ public class UserController {
 			return Response.failResult("用户Id不能为空");
 		}
 		Response<UserVO> user = null;
-		RLock rLock = redissonClient.getLock(userId);
+		RLock rLock = redissonManager.getRedisson().getLock(userId);
 		RedissonRLock.rlock(rLock).atomic(() -> userService.deductUserMoney(userId),5000,7000);
 		//userService.deductUserMoney(userId);
 		return user;
