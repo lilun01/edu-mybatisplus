@@ -25,7 +25,7 @@ spring:
   redis:
     host: 127.0.0.1
     database: 1
-    type: standalone
+    type: standalone #redis链接方式 参考  RedisConnectionType
     port: 6379
     #password:
     pool:
