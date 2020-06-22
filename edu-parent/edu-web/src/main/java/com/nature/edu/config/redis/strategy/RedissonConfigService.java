@@ -2,14 +2,14 @@ package com.nature.edu.config.redis.strategy;
 
 
 import org.redisson.config.Config;
-
 import com.nature.edu.entity.RedissonProperties;
 
 /**
+ * @Title: RedissonConfigService.java
  * @Description: Redisson配置构建接口
- *
- * @author xub
- * @date 2019/6/20 下午3:35
+ * @author lilun
+ * @date 2020-06-16 06:53:02
+ * @version 1.0
  */
 public interface RedissonConfigService {
 

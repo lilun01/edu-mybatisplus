@@ -36,6 +36,7 @@ public class UserMemoryTestController {
 	 */
 	@GetMapping("/test")
 	public String loop() {
+		logger.info("这个是测试日志{}",3);
 		add();
 		return "finish";
 	}

@@ -56,6 +56,7 @@ public class UserLockController {
 	 */
 	@GetMapping("/user/infoLock2")
 	public Response<UserVO> infoLock2(@RequestParam String userId, @RequestParam String lockKey) {
+		logger.info("userId ={}",userId);
 		if (StringUtils.isBlank(userId)) {
 			logger.error("查询用户信息时，userId不能为空'");
 			return Response.failResult("用户Id不能为空");
