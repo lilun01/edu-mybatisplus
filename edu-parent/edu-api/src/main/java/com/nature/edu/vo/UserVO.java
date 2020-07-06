@@ -36,6 +36,8 @@ public class UserVO extends NatureObject {
      * 昵称
      */
     private String nickName;
+    
+    private int money;
 
     /**
      * 姓名

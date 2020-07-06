@@ -58,6 +58,8 @@ public class BasUser implements Serializable {
     
     //钱数
     private Integer money;
+    
+    private UserAddress userAddress;
 
 
     @TableField(fill = FieldFill.INSERT)
