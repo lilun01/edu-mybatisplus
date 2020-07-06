@@ -5,7 +5,8 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.nature.edu.entity.BasUser;
 import com.nature.edu.vo.UserVO;
 import org.apache.ibatis.annotations.Param;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.util.List;
 
 /**
@@ -13,7 +14,7 @@ import java.util.List;
  * @date 2019/8/6
  */
 public interface BasUserMapper extends BaseMapper<BasUser> {
-
+	
     /**
      * 分页查询用户
      * @param searchName

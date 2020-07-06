@@ -3,12 +3,11 @@ package com.nature.edu.task;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 
-import org.redisson.api.RLock;
-import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.integration.redis.util.RedisLockRegistry;
 
 import com.nature.Response;
+import com.nature.edu.config.redis.RedissonManager;
 import com.nature.edu.service.IUserService;
 import com.nature.edu.vo.UserVO;
 
@@ -25,7 +24,8 @@ public class TaskRunnable implements Runnable{
 	private RedisLockRegistry redisLockRegistry;
 	public String corn;
 	
-	private  RedissonClient redissonClient;
+	@Autowired
+	private  RedissonManager redissonManager;
 	
 	//锁名称，一般使用唯一值
 	public String lockKey;

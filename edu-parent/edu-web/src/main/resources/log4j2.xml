@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="WARN" monitorInterval="1800">
     <properties>
-        <property name="LOG_HOME">/nature/edu-web/logs</property>
+        <property name="LOG_HOME">/edu-web/logs</property>
         <property name="DEBUG_LOG_FILE_NAME">debug</property>
         <property name="INFO_LOG_FILE_NAME">info</property>
         <property name="WARN_LOG_FILE_NAME">warn</property>
