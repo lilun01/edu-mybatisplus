@@ -123,7 +123,7 @@
 		<dependency>
 			<groupId>org.redisson</groupId>
 			<artifactId>redisson</artifactId>
-			<version>3.12.4</version>
+			<version>3.22.0</version>
 		</dependency>
 		<!-- eureka 注意版本问题，太高了，会提示找不到类 2.1.1版本 feignClient 的 url 参数不指定有问题 -->
 		<dependency>
